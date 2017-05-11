@@ -1,0 +1,60 @@
+html {
+  background: url(../assets/images/background.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body {
+	background: none;
+}
+
+.ui.inverted.list .list>.item .header, .ui.inverted.list>.item .header {
+	margin-bottom: 1em;
+}
+
+input.ng-invalid {
+  background-color: red !important;
+}
+
+.spacedDiv {
+	margin-top: .2em;
+	margin-bottom: 1em;
+	padding-bottom: 1em;
+	border-bottom: 1px solid gray;
+}
+
+.spacedDiv:last-child {
+	border-bottom: none;
+}
+
+input {
+	margin-left: 2em;
+}
+
+input.ng-valid {
+	background-color: lightgreen !important;
+}
+
+input.ng-invalid.ng-dirty {
+	background-color: lightpink !important;
+}
+
+html {
+	background: white;
+}
+
+.red {
+	background-color: red;
+}
+
+.ui.inverted.list .item a:not(.ui) {
+	color: lightskyblue !important;
+	text-decoration: underline;
+}
+
+.ui.inverted.list .list>.item .header, .ui.inverted.list>.item .header {
+	font-size: 1.36em;
+	color: white;
+}

@@ -1,0 +1,80 @@
+<form novalidate
+      name="ctrl.myForm"
+      class="ui form"
+      ng-submit="ctrl.roomSubmission()"
+      ng-class="{ 'error' : ctrl.myForm.$invalid && ctrl.myForm.$submitted }"
+      ng-hide="ctrl.loading">
+  <div class="ui large inverted form">
+    <div class="two fields">
+      <div class="field">
+        <label>Reserve For:</label>
+        <select name="reserveReason"
+                required
+                ng-options="reason as reason for reason in ctrl.reserveReasons"
+                ng-model="ctrl.reserveReason"></select>
+      </div>
+      <div class="field">
+        <label>Special Instructions:</label>
+        <input name="specialInstructions"
+               type="text"
+               ng-model="ctrl.specialInstructions">
+      </div>
+    </div>
+    <div class="two fields">
+      <div class="field">
+        <label>Start Time:</label>
+        <input name="startTime"
+               type="time"
+               require
+               ng-model="ctrl.startTime"
+               ng-model-options="{ allowInvalid: true }">
+      </div>
+      <div class="field">
+        <label>End Time:</label>
+        <input name="endTime"
+               type="time"
+               ng-model="ctrl.endTime"
+               ng-model-options="{ allowInvalid: true }"
+               ng-min="ctrl.startTime">
+      </div>
+    </div>
+    <div class="two fields">
+      <div class="field">
+        <label>Person to Contact:</label>
+        <input name="email1"
+               required
+               type="email"
+               ng-model="ctrl.email1">
+      </div>
+      <div class="field">
+        <label>Person to Contact (confirm):</label>
+        <input name="email2"
+               required
+               type="email"
+               ng-model="ctrl.email2"
+               ng-pattern="ctrl.email1">
+      </div>
+    </div>
+    <div class="fields">
+      <div class="inline field">
+        <label>I agree to be clean and good to the room:</label>
+        <input name="isAgreed"
+               required
+               type="checkbox"
+               ng-model="ctrl.isAgreed">
+      </div>
+    </div>
+    <div class="ui error message">
+      <div class="header">This entry has a few errors</div>
+      <ul ng-repeat="(key, errors) in ctrl.myForm.$error track by $index">
+        <li ng-repeat="error in errors">{{ key }} | {{ error.$name }}</li>
+      </ul>
+    </div>
+    <div class="fields">
+      <div class="field">
+        <button type="submit"
+                class="ui large submit button">Submit</button>
+      </div>
+    </div>
+  </div>
+</form>

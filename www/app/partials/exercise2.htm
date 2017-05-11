@@ -1,0 +1,91 @@
+<link href="/www/app/partials/exercise.{{css" rel="stylesheet" />
+
+<div class="ui container">
+	<div class="ui horizontal divider">
+		Exercise 2
+	</div>
+	<a href="/exercise1">Exercise 1</a>
+	<button type="button" ng-click="ctrl.exerciseService.login()">Login</button>
+
+	<button type="button" ng-click="ctrl.exerciseService.logout()">Logout</button>
+
+
+	<div class="spacedDiv">
+		Create a method on our controller have it change this button's text when this button is <i>rolled</i> over:
+		<br/><button class="ui large button" ng-mouseenter="ctrl.buttonMouseEnter()">{{ ctrl.buttonText }}</button>
+	</div>
+
+	<div class="spacedDiv">
+		When this button is <i>clicked</i>, reset the button text above:
+		<br/><button class="ui large button" ng-click="ctrl.buttonResetClick()">Reset Button Up There</button>
+	</div>
+
+	<div class="spacedDiv">
+		Bind to an object initialized in our controller.  Show its full JSON output:
+		<b>{{ ctrl.controllerInitObject | json }}</b>
+	</div>
+
+	<div class="spacedDiv">
+		One-time bind to controllerInitializedObject's name, all-caps:
+		<b>{{ ::ctrl.controllerInitObject.name | uppercase }}</b>
+	</div>
+
+	<div class="spacedDiv">
+		Bind to controllerInitializedObject's click count property:
+		{{ ctrl.controllerInitObject.clickCount}}
+	</div>
+
+	<div class="spacedDiv">
+		When this button is clicked, create a new object and add to controller's objectArray (give this object a name that makes sense and assign a random CSS color to the color property):
+		<br/><button class="ui large button" ng-click="ctrl.addNewObject()">Add New Object</button>
+	</div>
+
+	<div class="spacedDiv">
+		Change the name of controllerInitObject:
+		<br/><button class="ui large button" ng-click="ctrl.controllerInitObject.name = 'Obj Rename'">Change Name</button>
+	</div>
+
+	<div class="spacedDiv">
+		Create a button for every object in objectArray (ngRepeat).  The button's background color should be the object's
+		color property (ngStyle docs) and the button text should be the object's name and designate if it's first in array.  Clicking
+		the button should increase the object it represents' click count property by one, performing a console.log in the
+		process letting users' know what button was pressed and what its click count currently is:<br/>
+		<button class="ui large button"
+						ng-repeat="obj in ctrl.objectArray | filter: ctrl.filter as results"
+						ng-style="{ 'background-color': obj.color }"
+						ng-click="ctrl.addClickCount(obj)">
+			{{ obj.name }} | {{ obj.clickCount > 10 ? 'Leave me alone and get a life' : obj.clickCount }}
+		</button>
+
+		<!-- cast results to make this work -->
+		<span style="color: red;" ng-show="results.length === 0">Nothing matches filter: {{ ctrl.filter }}</span>
+	</div>
+
+	<div class="spacedDiv">
+		In fact, show the console.log output from above... here:
+	</div>
+
+	<div class="spacedDiv">
+		Filter the object array:
+		<input type="text" ng-model="ctrl.filter.name">
+	</div>
+
+	<div class="spacedDiv">
+		Filter the object array by ONLY click count:
+		<input type="text" ng-model="ctrl.filter.clickCount">
+	</div>
+
+	<div class="spacedDiv">
+		Create a drop-down that filters buttons by color:
+		<!--
+			syntax for ng-options we used
+			ng-options="SELECTEDVALUE as DISPLAYNAME for ITEM in COLLECTION"
+		-->
+		<select ng-model="ctrl.filter.color"
+						ng-change="ctrl.colorfilterChanged(color.hex)"
+						ng-options="color.hex as color.name for color in ctrl.possibleColors">
+			<option value="">-- choose color to filter --</option>
+			<!-- <option ng-repeat="color in ctrl.possibleColors" value="{{ color.hex }}">{{ color.name }}</option> -->
+		</select>
+	</div>
+</div>

@@ -1,0 +1,105 @@
+<link rel="stylesheet" href="/www/app/partials/welcome.css" />
+
+<div class="ui container">
+	<h3 class="ui block inverted header">
+		WEEK 1 <a href="/exercise1">Exercise 1</a>
+	</h3>
+	<div class="ui inverted grey segment">
+		<div class="ui inverted very relaxed divided big list">
+			<div class="item">
+				<div class="content">
+					<div class="header">AngularJS is a framework</div>
+					A framework is something you build into and, although hopefully not often, around.  Although frameworks themselves often
+					dictate the way an application is designed and implemented, many frameworks provide essential features which make using
+					them preferable.
+				</div>
+			</div>
+
+			<div class="item">
+				<div class="content">
+					<div class="header">JavaScript is a language</div>
+					It's simple and versatile.  We've been pushing JavaScript to do more and more. As such, libraries and frameworks for
+					JavaScript flourish and allow for more development features and better experiences, as well as improving the quality
+					of code delivered to clients, which was a larger issue plaguing JavaScript development in the past.
+				</div>
+			</div>
+
+			<div class="item">
+				<div class="content">
+					<div class="header">Your AngularJS needs localhost</div>
+					Browser security implementations don't allow you to run Angular applications from your file system the way you can regular
+					HTML documents.  Standard practice for running Angular applications is to build them and run in a local web server.
+				</div>
+			</div>
+
+			<div class="item">
+				<div class="content">
+					<div class="header">Some basic I.T. required</div>
+					Your web server, whatever it is, be it IIS, Apache, Express, SuperStatic, etc., needs URL <b>rewriting</b> to be properly
+					configured.  We used SuperStatic in class for its easy configuration.
+				</div>
+			</div>
+
+			<div class="item">
+				<div class="content">
+					<div class="header">We used Node Package Manager</div>
+					All of our vendor dependencies were collected via NPM, and we included these in our index.htm file.  You may include
+					dependencies one by one or bundle them into a vendor bundle.  Bundling is typically more performant.
+				</div>
+			</div>
+
+			<div class="item">
+				<div class="content">
+					<div class="header">Modules and Index.js</div>
+					We get a reference to Angular, and using its API we create an Angular module, which we configure for HTML5 and
+					routing, although this may be done anywhere you have a reference to your application module.  For simplicity,
+					this application only uses one module named &quot;application.&quot;
+				</div>
+			</div>
+
+			<div class="item">
+				<div class="content">
+					<div class="header">Routing makes the URL application input</div>
+					Your HTML templates don't reference one another by file system relativity. Angular routing now handles all of this, mapping
+					URL input to templates, controllers and component pieces.
+				</div>
+			</div>
+
+			<div class="item">
+				<div class="content">
+					<div class="header">Routing requires Angular to be booted up</div>
+					Routing doesn't work if Angular isn't booted, and Angular needs to be booted by loading index.htm; as such, you can't expect
+					your application to work if you enter &quot;sideways&quot;, via a URL where the server doesn't serve index.htm and load the required
+					JavaScript.
+				</div>
+			</div>
+
+			<div class="item">
+				<div class="content">
+					<div class="header">Wrap in Angular</div>
+					Our actual application logic is wrapped in Angular stuff (hence the bit above about Angular being a framework), but this extra
+					boilerplate is worth it as we explore the rich eco-system of features, Features, FEATURES Angular exposes to us.
+				</div>
+			</div>
+
+			<div class="item">
+				<div class="content">
+					<div class="header">Bindings</div>
+					Use interpolation brackets around an expression to display the results of that expression on your HTML template. ngModel
+					allows you to create two-way data-binding on controls like input and textarea. To improve performance of your application
+					significantly on documents with lots of bound data, use one-time binding &quot;::&quot; where one-time binding makes sense.
+				</div>
+			</div>
+
+			<div class="item" ng-non-bindable>
+				<div class="content">
+					<div class="header">Expressions</div>
+					<code>{{ expression goes here }}</code>, the expression being a property on your controller, scope or rootscope, an
+					assignment, etc. If a binding only needs to be evaluated once, use <code>{{ ::expression }}</code> to improve performance
+					on a document with a lot of data to bind.
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

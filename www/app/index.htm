@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <title>Geekwise Academy (Beginning Angular Class)</title>
+  <base href="/" />
+
+  <!-- build -->
+  <script type="text/javascript" src="www/build/vendor.min.js"></script>
+  <script type="text/javascript" src="www/build/app.min.js"></script>
+  <link rel="stylesheet" href="www/build/semantic.min.css" />
+
+  <!-- app styles -->
+  <link rel="stylesheet" href="www/app/styles.css" />
+
+  <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDhJPjpVUCmCMvw6DTaTlorDLnE1Enh4Wg",
+      authDomain: "confdeconflictor.firebaseapp.com",
+      databaseURL: "https://confdeconflictor.firebaseio.com",
+      projectId: "confdeconflictor",
+      storageBucket: "confdeconflictor.appspot.com",
+      messagingSenderId: "519140165558"
+    };
+    firebase.initializeApp(config);
+  </script>
+</head>
+
+<body ng-app="application">
+  <!-- our URL changes are presented here -->
+  <gw-navigation></gw-navigation>
+  <!-- <gw-room></gw-room> -->
+  <div ng-view></div>
+  <!-- <gw-footer></gw-footer> -->
+
+</body>
+
+</html>
