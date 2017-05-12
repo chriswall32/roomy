@@ -1,7 +1,7 @@
 (function(angular) {
   angular
     .module("application")
-    .factory("loginService", function() {
+    .factory("loginService", function($rootScope) {
       let loggedInUser = null;
       let notifyControllerCallback = null;
 
@@ -14,21 +14,19 @@
         logout
       };
 
+      function updateLoginStatus(authenticatedUser) {
+        // console.log(authenticatedUser);
+
+        loggedInUser = authenticatedUser;
+        $rootScope.$apply();
+      }
+
       function getLoggedInUser() {
         return loggedInUser;
       };
 
-      function updateLoginStatus(authenticatedUser) {
-        console.log(authenticatedUser);
+      function login() {
 
-        loggedInUser = authenticatedUser;
-
-        if (notifyControllerCallback) notifyControllerCallback();
-
-      }
-
-      function login(callback) {
-        notifyControllerCallback = callback;
         return firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider());
       }
 

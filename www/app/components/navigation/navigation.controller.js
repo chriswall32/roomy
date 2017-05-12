@@ -4,38 +4,34 @@
     .controller("navigationComponentController", function($location, navigationService, roomService) {
       this.$onInit = function() {
         this.navigationService = navigationService;
-        this.roomService = roomService;
-        roomService.fetchRoomsFromDB();
 
-        // console.log("NavigationInit");
 
-        // let welcomeItem = {
-        //   title: "Welcome",
-        //   url: "/welcome"
-        // };
-        //
-        // navigationService.addNavigationItem(welcomeItem);
+        let welcomeItem = {
+          title: "Welcome",
+          url: "/welcome"
+        };
 
-        // add rooms
-        // let rooms = roomService.fetchRoomsFromDB();
-        // console.log(rooms);
-        // rooms.forEach(function(room) {
-        //   console.log(room);
-        //   const itemToAdd = {
-        //     title: room.name,
-        //     url: "/room/$(room.id)"
-        //   };
-        //   navigationService.addNavigationItem(itemToAdd);
-        // });
+        navigationService.addNavigationItem(welcomeItem);
 
-        // add about link
-      //   let aboutItem = {
-      //     title: "About",
-      //     url: "/about"
-      //   };
-      //
-      //   navigationService.addNavigationItem(aboutItem);
-      //
+        //add rooms
+        roomService.fetchRoomsFromDB().then(rooms => {
+
+          angular.forEach(rooms, function(objectValue, objectKey) {
+						const itemToAdd = {
+							title : objectValue.name,
+							url   : `/room/${objectKey}`
+						};
+            navigationService.addNavigationItem(itemToAdd);
+          });
+
+          //add about link
+          let aboutItem = {
+            title: "About",
+            url: "/about"
+          };
+
+          navigationService.addNavigationItem(aboutItem);
+      });
       };
 
       this.isItemActive = function(url) {

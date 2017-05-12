@@ -1,35 +1,12 @@
 <div class="ui inverted segment">
-  <div class="ui inverted secondary pointing menu">
-    <a href="/" class="item">Home</a>
+	<div class="ui inverted secondary pointing menu navigation">
 
-    <a class="item" ng-repeat="room in ctrl.roomService.getRooms()"
-        ng-href="/room/{{ room.id }}"
-        ng-class="{ 'active': ctrl.isItemActive(room.url) }">
-      {{ room.name }}
-    </a>
+		<a ng-repeat="navItem in ctrl.navigationService.getNavigation()"
+		   ng-href="{{ navItem.url }}"
+		   ng-class="{ active : ctrl.isItemActive(navItem.url) }"
+		   class="item">
+		   {{ navItem.title }}
+		</a>
 
-    <div class="right menu">
-      <div class="item">
-        <div class="ui inverteds" ng-show="ctrl.loginService.getLoggedInUser()">
-          <h6 class=""> {{ ctrl.loginService.getLoggedInUser().displayName }}</h6>
-          <img class="ui avatar image" ng-src="{{ ctrl.loginService.getLoggedInUser().photoURL }}">
-        </div>
-      </div>
-      <div class="item">
-        <div class="ui inverted button"
-          ng-click="ctrl.loginService.login(ctrl.refresh)"
-          ng-href="/login"
-          ng-show="!ctrl.loginService.getLoggedInUser()">
-          Log-in
-        </div>
-      </div>
-      <div class="item">
-        <div class="ui inverted button"
-          ng-click="ctrl.loginService.logout()"
-          ng-show="ctrl.loginService.getLoggedInUser()">
-          Logout
-        </div>
-      </div>
-    </div>
-  </div>
+	</div>
 </div>

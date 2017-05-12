@@ -3,10 +3,11 @@
     .module("application")
     .component("gwRoomReservationForm", {
       templateUrl   : "www/app/components/room/room-reservation-form/room-reservation-form.htm",
-      controller    : "roomReservationFormComponentController",
+      controller    : "roomReservationFormController",
       controllerAs  : "ctrl",
       bindings      : {
-        room : "<"
+        room        : "<",
+				onSubmitted : "&"
       }
 
     });

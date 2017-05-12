@@ -1,59 +1,75 @@
-(function(angular) {
+(function (angular) {
 	angular
 		.module("application")
 
-		.factory("roomService", function($timeout) {
-			let rooms = null;
-
+		.factory("roomService", function ($http, applicationSettings) {
 			return {
-				getRooms,
 				getRoomById,
-				fetchRoomsFromDB
+				fetchRoomsFromDB,
+				resetRoomsToDB,
+				writeRoomReservation,
+				getRoomDateKey
 			};
 
-			function getRooms() {
-				return rooms;
-			}
-
 			function getRoomById(id) {
-				return $timeout(function() {
-					let roomToReturn = null;
-
-					rooms.forEach(function(room) {
-						if (id == room.id) roomToReturn = room;
-					});
-
-					return roomToReturn;
-				}, 1500);
+				return $http.get(applicationSettings.getFirebaseRestUrl(`rooms/${id}`))
+					.then(response => response.data);
 			}
 
 			function fetchRoomsFromDB() {
-				return $timeout(function() {
-					rooms = [
-						{
-							name    : "Halo",
-							id      : 1,
-							picture : 'www/assets/images/halo.jpg'
-						},
-						{
-							name    : "Sonic",
-							id      : 2,
-							picture : 'www/assets/images/sonic.jpg'
-						},
-						{
-							name    : "Zelda",
-							id      : 3,
-							picture : 'www/assets/images/zelda.jpg'
-						},
-						{
-							name    : "Star Fox",
-							id      : 4,
-							picture : 'www/assets/images/starfox.jpg'
-						},
-					];
+				return $http.get(applicationSettings.getFirebaseRestUrl("rooms"))
+					.then(response => response.data);
+			}
 
-					return rooms;
-				}, 1500);
+			function resetRoomsToDB() {
+				const url = applicationSettings.getFirebaseRestUrl("rooms");
+
+				return $http.delete(url)
+					.then(() => {
+						return $http.put(url, {
+							halo: {
+								name: "Halo",
+								picture: 'halo.jpg'
+							},
+							sonic: {
+								name: "Sonic",
+								picture: 'sonic.jpg'
+							},
+							zelda: {
+								name: "Zelda",
+								picture: 'zelda.jpg'
+							},
+							starfox: {
+								name: "Star Fox",
+								picture: 'starfox.jpg'
+							},
+							simcity: {
+								name: "Sim City",
+								picture: 'simcity.jpg'
+							}
+						});
+					})
+					.then(fetchRoomsFromDB);
+			}
+
+			function writeRoomReservation(id, reservation) {
+				return getRoomById(id)
+					.then(room => {
+						// we get room so some validation could be performed here before we post, though note this doesn't
+						// eliminate race conditions
+
+						// currently, this just posts to the current date because nothing is passed in getRoomDateKey
+						return $http.post(applicationSettings.getFirebaseRestUrl(`rooms/${id}/reservations/${getRoomDateKey()}`), reservation);
+					});
+			}
+
+			function getRoomDateKey(date) {
+				let dateKey;
+
+				dateKey = date ? new Date(date).toDateString() : new Date().toDateString();
+				dateKey = dateKey.replace(/ /g, "");
+
+				return dateKey;
 			}
 		});
 }(window.angular));

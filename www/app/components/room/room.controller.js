@@ -2,49 +2,32 @@
 	angular
 		.module("application")
 
-		.controller("roomComponentController", function (roomService, $routeParams) {
+		.controller("roomComponentController", function ($routeParams, applicationSettings, roomService) {
 			this.$onInit = function() {
-				console.log(this);
+				this.initRoom();
+			};
 
+			this.onSubmitted = function() {
+				console.log("Our form component just updated roomComponent through output binding");
+				this.initRoom();
+			};
+
+			this.initRoom = function() {
 				this.loading = true;
 
-				this.startTime = new Date();
-				this.startTime.setHours(0, 0, 0, 0);
+				roomService.getRoomById($routeParams.id)
+					.then(roomResult => {
+						this.room = roomResult;
 
-				this.endTime = new Date();
-				this.endTime.setHours(0, 0, 0, 0);
+						// attach id to room object for convenience
+						this.room.id = $routeParams.id;
 
-				this.reserveReasons = [
-					"Birthday",
-					"Conference",
-					"Interview",
-					"Scrum Meeting",
-					"Honeymoon"
-				];
+						// update room picture with path to our local asset
+						this.room.picture = applicationSettings.getImagePath(this.room.picture);
 
-				roomService.getRoomById($routeParams.id).then(roomResult => {
-					this.room = roomResult;
-					this.loading = false;
-				});
+						// hide loading UI
+						this.loading = false;
+					});
 			}
-
-			this.roomSubmission = function() {
-				if (this.getMinTime() >= this.endTime) {
-					this.myForm.endTime.$setValidity("min", false)
-
-					return alert("Message from controller: time invalid");
-				}
-
-				if (this.myForm.$invalid) return alert("Message from controller: form invalid");
-
-				alert("Room submitted");
-			}
-
-			this.getMinTime = function() {
-				let date = new Date(this.startTime);
-				date.setHours(date.getHours() + 1);
-
-				return date;
-			};
 		});
 }(window.angular));

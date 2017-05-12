@@ -1,21 +1,21 @@
 <div class="contentPanel login">
 	<div class="ui middle aligned center aligned grid buttonGrid">
-		<div class="row" ng-show="ctrl.loginService.getLoggedInUser()">
+		<div class="row" ng-show="ctrl.getLoggedInUser()">
 			<div class="column">
-				<img class="ui avatar medium image" ng-src="{{ ctrl.loginService.getLoggedInUser().photoURL }}">
-				<h1 class="ui header">{{ ctrl.loginService.getLoggedInUser().displayName }}</h1>
+				<img class="ui avatar medium image" ng-src="{{ ctrl.getLoggedInUser().photoURL }}">
+				<h1 class="ui header">{{ ctrl.getLoggedInUser().displayName }}</h1>
 			</div>
 		</div>
 		<div class="row">
 			<div class="column">
 				<button class="ui large left attached button"
 						ng-click="ctrl.loginService.login(ctrl.refresh)"
-						ng-disabled="ctrl.loginService.getLoggedInUser()">
+						ng-disabled="ctrl.getLoggedInUser()">
 						Login
 				</button>
 				<button class="ui large right attached button"
 						ng-click="ctrl.loginService.logout()"
-						ng-disabled="!ctrl.loginService.getLoggedInUser()">
+						ng-disabled="!ctrl.getLoggedInUser()">
 						Logout
 				</button>
 			</div>

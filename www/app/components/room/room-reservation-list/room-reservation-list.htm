@@ -1,5 +1,14 @@
-
-
-<div ng-style="{ 'background-image': `url( ' + ctrl.parentController.room.picture + ` )` }">
-
+<div class="reservationList">
+	<img class="ui medium circular centered image" ng-src="{{ ctrl.parentController.room.picture }}">
+	<table>
+		<tr ng-repeat="reservation in ctrl.getReservationsByDay()">
+			<td>User: </td>
+			<td class="data">{{ reservation.email }}</td>
+			<td>Time Start: </td>
+			<td class="data">{{ reservation.startTime | date:'shortTime' }}</td>
+			<td>Time End: </td>
+			<td class="data">{{ reservation.endTime | date:'shortTime'  }}</td>
+			<td><input type="checkbox"></td>
+		</tr>
+	</table>
 </div>
